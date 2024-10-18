@@ -1,4 +1,10 @@
 pipeline {
+  environment {
+    IMAGENAME = 'webdemo'
+    IMAGETAG = '1.0.0'
+    APPPORT = '6089'
+    APPDIR = '/opt/app'
+  }
   agent none
   stages {
     stage('Build') {
@@ -28,6 +34,7 @@ pipeline {
     }
 
     stage('Deploy') {
+      agent any
       steps {
         sh 'touch Dockerfile'
         sh 'env'
@@ -43,10 +50,5 @@ pipeline {
     }
 
   }
-  environment {
-    IMAGENAME = 'webdemo'
-    IMAGETAG = '1.0.0'
-    APPPORT = '6089'
-    APPDIR = '/opt/app'
-  }
+
 }
