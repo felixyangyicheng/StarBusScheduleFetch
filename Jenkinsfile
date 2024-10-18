@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    IMAGENAME = 'webdemo'
+    IMAGENAME = 'starbusschedulefetch'
     IMAGETAG = '1.0.0'
     APPPORT = '6089'
     APPDIR = '/opt/app'
@@ -40,7 +40,7 @@ pipeline {
         sh 'env'
         sh 'echo "start edit Dockerfile"'
         sh 'echo "FROM mcr.microsoft.com/dotnet/aspnet:9.0-alpine" >> Dockerfile'
-        sh 'echo "COPY src/WebDemo/bin/Release/net9/publish ${APPDIR}" >> Dockerfile'
+        sh 'echo "COPY StarBusScheduleFetch/bin/Release/net9/publish ${APPDIR}" >> Dockerfile'
         sh 'echo "EXPOSE ${APPPORT}" >> Dockerfile'
         sh 'echo "WORKDIR ${APPDIR}" >> Dockerfile'
         sh 'echo \'ENTRYPOINT ["dotnet", "StarBusScheduleFetch.dll"]\' >> Dockerfile'
