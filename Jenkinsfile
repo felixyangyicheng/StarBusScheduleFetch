@@ -1,10 +1,4 @@
 pipeline {
-    environment {
-      IMAGENAME = 'webdemo'
-      IMAGETAG = '1.0.0'
-      APPPORT = '6089'
-      APPDIR = '/opt/app'
-    }
   agent none
   stages {
     stage('Build') {
@@ -13,6 +7,7 @@ pipeline {
           image 'mcr.microsoft.com/dotnet/sdk:9.0-alpine'
           args '-v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker'
         }
+
       }
       steps {
         sh 'dotnet restore'
@@ -25,6 +20,7 @@ pipeline {
           image 'mcr.microsoft.com/dotnet/sdk:9.0-alpine'
           args '-v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker'
         }
+
       }
       steps {
         sh 'dotnet publish StarBusScheduleFetch -c Release'
@@ -47,5 +43,10 @@ pipeline {
     }
 
   }
-
+  environment {
+    IMAGENAME = 'webdemo'
+    IMAGETAG = '1.0.0'
+    APPPORT = '6089'
+    APPDIR = '/opt/app'
+  }
 }
